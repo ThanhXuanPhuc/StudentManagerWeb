@@ -17,7 +17,13 @@ namespace StudentManagerWeb.Controllers
         public IActionResult Index()
         {
             var studentList = _db.Students.ToList();
-            var avgAge = _db.Students.Average(x=>x.Age);
+
+            double avgAge = 0;
+            if (studentList.Any())
+            {
+                avgAge = studentList.Average(x => x.Age);
+            }
+
             ViewBag.Avg_Age = avgAge;
             return View(studentList);
         }
